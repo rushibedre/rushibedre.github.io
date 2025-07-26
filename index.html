@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rushikesh Bedre | BI Developer & Data Analyst</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #2F80ED;
+      --accent: #FF355D;
+      --dark-bg: #0a0d16;
+      --glass-bg: rgba(22,28,48,0.83);
+      --card-glow: 0 0 16px #2F80ED60, 0 0 32px #FF355D50;
+    }
+    html, body {height:100%;}
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0d16 0%, #2F80ED 54%, #FF355D 100%);
+      background-attachment: fixed;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Gradual radial overlays for more depth */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 80% 12%, #FF355D35 0%, transparent 52%),
+        radial-gradient(ellipse at 18% 98%, #2F80ED22 0%, transparent 66%),
+        radial-gradient(ellipse at 44% 60%, #18102b18 0%, transparent 80%);
+      mix-blend-mode: lighten;
+    }
+    /* Mouse-move spotlight effect */
+    #spotlight {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      width: 75vw;
+      height: 75vw;
+      max-width: 530px;
+      max-height: 530px;
+      background: radial-gradient(circle at center, #fff3 2%, transparent 79%);
+      left: -999vw;
+      top: -999vw;
+      opacity: .38;
+      transition: opacity .3s;
+      border-radius: 50%;
+    }
+    body:hover #spotlight {opacity: .59;}
+    header {
+      background: linear-gradient(90deg, #0a0d16d7 0%, #2F80ED80 70%, #FF355D40 100%);
+      box-shadow: var(--card-glow);
+      padding: 2.15rem 0 1.35rem;
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      transition: background 0.5s;
+      text-align: center;
+      backdrop-filter: blur(2px);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.65rem;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg,#fff,#2F80ED 80%,#FF355D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 3px 12px #0003);
+      animation: hueRotate 7s linear infinite;
+    }
+    @keyframes hueRotate {0%{filter: hue-rotate(0deg);} 100%{filter: hue-rotate(360deg);}}
+    header p {
+      font-size: 1.16rem;
+      color: #b3e5ff;
+      margin-bottom: 1.08rem;
+      letter-spacing: .25px; opacity: 0.90;
+      text-shadow: 0 1px 7px #000b;
+    }
+    nav {padding:.3rem 0 0;}
+    nav a {
+      color: #7eb6ff;
+      text-decoration: none;
+      margin: 0 1.15em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.03rem; position: relative;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active {
+      color: #FF355D;
+      text-shadow: 0 0 7px #FF355D70;
+    }
+    nav a.active::after, nav a:hover::after {
+      content: '';
+      display: block;
+      margin: .24em auto 0;
+      width: 70%; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg,#2F80ED 40%,#FF355D 100%);
+      animation: underlineIn .23s;
+    }
+    @keyframes underlineIn {from{width:0} to{width:70%}}
+    section {
+      position: relative;
+      max-width: 900px;
+      margin: 2.2rem auto;
+      padding: 2rem 2.5rem;
+      background: var(--glass-bg);
+      border-radius: 2em;
+      box-shadow: 0 12px 46px 0 #22192d33, 0 1.5px 10px #10102060;
+      backdrop-filter: blur(7px) saturate(1.13);
+      animation: fadeInUp .8s;
+      transition: box-shadow .4s, background 0.6s;
+      z-index: 2;
+      border: 2px solid #1c2137aa;
+    }
+    @keyframes fadeInUp {from { opacity: 0; transform: translateY(40px);} to { opacity: .99; transform: translateY(0);}}
+    .about {
+      background: transparent; box-shadow: none; text-align: center; margin-top: 2rem; animation-delay: .08s;
+    }
+    .about p {
+      font-size: 1.18rem;
+      color: #bbdeff;
+      background: linear-gradient(90deg,#fff,#2F80ED,#FF355D 94%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 7px #0001);
+      margin: 0 0 16px 0;
+    }
+    /* Projects - 3D Flip Cards */
+    #projects .card-flip-wrap {
+      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+    }
+    .flip-card {
+      min-width: 260px; max-width: 340px; width: 100%;
+      height: 320px; perspective: 1100px; margin-bottom: 1.5em;
+      border-radius: 2em; box-shadow: var(--card-glow);
+    }
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%; border-radius: inherit;
+      transition: transform .7s cubic-bezier(.2,.9,.5,1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner, .flip-card:focus .flip-card-inner { transform: rotateY(180deg);}
+    .flip-card-front, .flip-card-back {
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+      border-radius: inherit; padding: 1.27em 1.15em 1.13em;
+      background: rgba(19,26,43,0.95); box-shadow: 0 8px 26px #2F80ED1b;
+      border: 2.2px solid #1D355D50; display: flex; flex-direction: column;
+      justify-content: center; transition: background 0.5s;
+    }
+    .flip-card-front i { font-size:1.6em;margin-bottom:.23em;color:#2F80ED;}
+    .flip-card-front h3 {
+      margin: 0 0 .5em 0;
+      color: #62aaff;
+      background: linear-gradient(90deg,#fff,#2F80ED 80%,#FF355D 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-size: 1.19em; letter-spacing:.12px;
+      transition: filter .3s;
+    }
+    .flip-card-front ul {margin:0.4em 0 0 1.1em; color:#ffe5ffec; font-size:1.03em;}
+    .flip-card-back {
+      background: linear-gradient(120deg,#24376a 66%,#2F80ED88,#FF355D33);
+      color: #fff; transform: rotateY(180deg);
+      text-align: center; box-shadow: var(--card-glow); z-index: 2;
+    }
+    .flip-card-back button, .flip-card-back a {
+      margin-top:1.1em; color: #fff; background: linear-gradient(100deg,#2F80ED 50%,#FF355D 100%);
+      font-weight: 700; padding:.65em 1.6em; border:none; border-radius:1.2em; font-size:.98em;
+      box-shadow: 0 12px 24px #18184633; cursor: pointer; text-decoration: none;
+      transition: background .23s;
+      letter-spacing:.08em;
+    }
+    .flip-card-back button:hover, .flip-card-back a:hover {
+      background: linear-gradient(90deg,#FF355D 30%,#2F80ED 98%);
+    }
+    /* Experience */
+    #experience b { color: #FF355D; font-weight: 700; letter-spacing: .1px; font-size: 1.05em;}
+    #experience ul {margin:.5em 0 0 1.2em;font-size:1.04em;color: #e8bbff;}
+    /* Skills */
+    #skills p { font-size: 1.13em; color: #a4e2ff;}
+    #skills b { color: #2F80ED; font-size: 1.04em;}
+    /* Education */
+    #education ul { color: #ffc2e6;font-size: 1.13em;}
+    /* Achievements */
+    #achievements {background: linear-gradient(120deg,#1a1024b0 66%,#2F80ED24,#FF355D17);}
+    #achievements ul { color: #ffd3fb;font-size: 1.08em;}
+    #achievements h3 {margin:0 0 .49em;color:#ff90b0;}
+    /* Contact */
+    #contact a {
+      color: #2F80ED; transition: color .2s;
+      font-weight: 700; text-decoration: none;
+      margin: 0 .6em; font-size: 1.19em; vertical-align: middle;
+      display: inline-block;
+    }
+    #contact a:hover { color: #FF355D; text-shadow: 0 0 4px #FF355D77;}
+    #contact .fa-brands, #contact .fa-envelope {margin-right: .23em;font-size: 1.23em; vertical-align: middle;}
+    @media (max-width: 700px) {
+      section {padding:1.13rem 0.6rem;}
+      .about{padding:0 0.11em 1em;}
+      header h1{font-size:1.41rem;}
+      nav{font-size:.935em;}
+      #projects .card-flip-wrap {flex-direction: column; gap:1rem;}
+      .flip-card{max-width:97vw;}
+      section {margin:1.15rem .14rem;}
+    }
+    /* Reveal Animations */
+    .revealed {opacity:1 !important;transform:translateY(0) !important;transition:opacity .67s,transform .68s;}
+    section, .flip-card {opacity:0;transform:translateY(40px);transition:opacity .7s,transform .66s;}
+  </style>
+</head>
+<body>
+  <div id="spotlight"></div>
+  <header>
+    <h1>Rushikesh Bedre</h1>
+    <p>Aspiring Business Intelligence Developer & Data Analyst</p>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <section class="about">
+    <p>
+      Hands-on in <b>Python, SQL, AWS QuickSight, Power BI, Tableau, ThoughtSpot</b>.<br>
+      Proficient in data visualization, cloud analytics, ETL pipeline optimization, and dashboard development.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="card-flip-wrap">
+      <!-- HR Analytics -->
+      <div class="flip-card" tabindex="0">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <i class="fa-solid fa-chart-pie"></i>
+            <h3>HR Analytics Dashboard</h3>
+            <ul>
+              <li>Interactive dashboard for 1,400+ employee records.</li>
+              <li>Advanced SQL for transformation & Tableau for visuals.</li>
+              <li>Reduces manual HR reporting by 40%, enables real-time analysis.</li>
+            </ul>
+          </div>
+          <div class="flip-card-back">
+            <p>Data-driven insights for HR teams. Click to view on GitHub.</p>
+            <a href="https://github.com/rushibedre/hr-analytics-dashboard" target="_blank">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Crime Data -->
+      <div class="flip-card" tabindex="0">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Crime Data Analysis & Monitoring</h3>
+            <ul>
+              <li>Processed 1M+ records using PySpark & Pandas.</li>
+              <li>Power BI dashboard for real-time crime analytics.</li>
+              <li>Built 25+ visualizations including heatmaps and trends.</li>
+            </ul>
+          </div>
+          <div class="flip-card-back">
+            <p>Smart monitoring of urban crime. See more on GitHub.</p>
+            <a href="https://github.com/rushibedre/crime-data-analysis" target="_blank">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Mechatronics Traffic Control -->
+      <div class="flip-card" tabindex="0">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <i class="fa-solid fa-car-on"></i>
+            <h3>Mechatronics-Based Advanced Traffic Control System</h3>
+            <ul>
+              <li>Integrated mechanical & electronics for smart, precise traffic control.</li>
+              <li>Dual system: generates electricity & prevents reverse movement on lanes.</li>
+              <li>Auto-syncs with signals, reduces violations & boosts safety.</li>
+              <li>Future: ANPR cameras to auto-issue challans & track vehicles in real time.</li>
+            </ul>
+          </div>
+          <div class="flip-card-back">
+            <p>Innovating smart cities with mechatronics.<br>Publication available.</p>
+            <a href="#achievements"><i class="fa-solid fa-trophy"></i> See Paper & Achievements</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div>
+      <b>Business Intelligence Developer Intern</b> – Rainbow Infotech Pvt Ltd (Apr 2025 – July 2025)
+      <ul>
+        <li>Developed 12+ dashboards with Tableau, Power BI, QuickSight, and ThoughtSpot.</li>
+        <li>Improved reporting time by 40% and optimized SQL-based ETL pipelines.</li>
+        <li>Collaborated across 5+ teams; delivered 20+ custom dashboards.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills & Tools</h2>
+    <p>
+      <b>Languages:</b> Python, SQL<br>
+      <b>Libraries:</b> Pandas, NumPy, Matplotlib, Seaborn, PySpark<br>
+      <b>Tools:</b> AWS QuickSight, ThoughtSpot, Power BI, Tableau, Power Pivot, Selenium<br>
+      <b>Soft Skills:</b> Teamwork, Problem-Solving, AI-Assisted Research
+    </p>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ul>
+      <li><b>B.Tech. Electronics & Communication Engineering</b>, Priyadarshini Bhagwati COE, CGPA 7.73/10 (2021-2024)</li>
+      <li><b>Diploma in Mechanical Engineering</b>, Suryodaya COE, CGPA 8.6/10 (2019-2021)</li>
+    </ul>
+  </section>
+
+  <section id="achievements">
+    <h2>Achievements & Research</h2>
+    <h3>Research Publications</h3>
+    <ul>
+      <li>
+        <b>Mechatronics-Based Advanced Traffic Control System</b> &mdash; Published in International Journal<br>
+        <span style="font-size:0.97em;color:#dad2ff;">
+          Discusses development & real-world implementation of a mechatronics-driven traffic system, featuring dual-purpose mechanics, safety optimization, and scope for ANPR & centralized tracking.
+        </span>
+      </li>
+    </ul>
+    <h3>Awards</h3>
+    <ul>
+      <li>Paper selected for presentation at National Engineering Symposium 2025.</li>
+      <li>Recognized by College as “Best Research Project 2024-25”.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      <a href="mailto:rushibedre10@gmail.com"><i class="fa-solid fa-envelope"></i>Email</a> 
+      <a href="https://www.linkedin.com/in/rushikesh-bedre" target="_blank"><i class="fa-brands fa-linkedin"></i>LinkedIn</a> 
+      <a href="https://github.com/rushibedre" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a>
+    </p>
+  </section>
+
+  <script>
+    // Section/project scroll reveal
+    const revealEls = document.querySelectorAll('section, .flip-card');
+    function revealOnScroll() {
+      let wh = window.innerHeight * 0.96;
+      revealEls.forEach(el => {
+        if (el.getBoundingClientRect().top < wh)
+          el.classList.add('revealed');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('DOMContentLoaded', revealOnScroll);
+
+    // Sticky nav highlight
+    const navLinks = document.querySelectorAll('nav a');
+    function setActiveNav() {
+      let fromTop = window.scrollY + 90;
+      navLinks.forEach(link => {
+        let href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          let section = document.querySelector(href);
+          if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', setActiveNav);
+    window.addEventListener('DOMContentLoaded', setActiveNav);
+
+    // Mouse spotlight
+    const spotlight = document.getElementById('spotlight');
+    document.body.addEventListener('mousemove', (e) => {
+      spotlight.style.left = (e.pageX-265)+"px";
+      spotlight.style.top = (e.pageY-265)+"px";
+    });
+    document.body.addEventListener('mouseleave', () => {
+      spotlight.style.left="-999vw"; spotlight.style.top="-999vw";
+    });
+  </script>
+</body>
+</html>

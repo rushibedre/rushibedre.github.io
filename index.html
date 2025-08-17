@@ -1,359 +1,757 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Rushikesh Bedre | BI Developer & Data Analyst</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-  <style>
-    :root {
-      --primary: #1e90ff; /* Dodger Blue */
-      --accent: #9b59b6;  /* Amethyst Purple */
-      --dark-bg: #121212; /* Very dark gray/black */
-      --glass-bg: rgba(30,30,30,0.85);
-      --card-glow: 0 0 16px #1e90ff70, 0 0 32px #9b59b650;
-    }
-    html, body {height:100%;}
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary) 55%, var(--accent) 100%);
-      background-attachment: fixed;
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      margin: 0; padding: 0; position: relative; overflow-x: hidden;
-    }
-    body::after {
-      content: "";
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(ellipse at 75% 15%, var(--accent)22 0%, transparent 50%),
-        radial-gradient(ellipse at 18% 95%, var(--primary)22 0%, transparent 63%),
-        radial-gradient(ellipse at 47% 60%, #00000033 0%, transparent 85%);
-      mix-blend-mode: lighten;
-    }
-    #spotlight {
-      position: fixed; pointer-events: none; z-index: 1;
-      width: 75vw; height: 75vw; max-width: 530px; max-height: 530px;
-      background: radial-gradient(circle at center, #ffffff33 2%, transparent 79%);
-      left: -999vw; top: -999vw; opacity: .42; transition: opacity .3s; border-radius: 50%;
-    }
-    body:hover #spotlight {opacity: .6;}
-    header {
-      background: linear-gradient(90deg, var(--dark-bg)dd 0%, var(--primary)55%, var(--accent)70%);
-      box-shadow: var(--card-glow);
-      padding: 2.2rem 0 1.5rem;
-      position: sticky; top: 0; z-index: 4;
-      transition: background 0.5s;
-      text-align: center;
-      backdrop-filter: blur(3px);
-    }
-    header h1 {
-      margin: 0; font-size: 2.65rem; letter-spacing: 2px;
-      background: linear-gradient(90deg,#fff,var(--primary) 80%,var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 3px 12px #0003);
-      animation: hueRotate 7s linear infinite;
-    }
-    @keyframes hueRotate {0%{filter: hue-rotate(0deg);} 100%{filter: hue-rotate(360deg);}}
-    header p {
-      font-size: 1.18rem; color: #b3e5ff; margin-bottom: 1.1rem;
-      letter-spacing: .3px; opacity: 0.88;
-    }
-    nav {
-      padding: .3rem 0 0;
-    }
-    nav a {
-      color: #7eb6ff; text-decoration: none; margin: 0 1.1em; font-weight: 700;
-      letter-spacing: 1px; font-size: 1.02rem; position: relative;
-      display: inline-block; transition: color 0.2s;
-    }
-    nav a:hover, nav a.active {
-      color: var(--accent);
-    }
-    nav a.active::after, nav a:hover::after {
-      content: '';
-      display: block; margin: .24em auto 0; width: 70%; height: 3px; border-radius: 2px;
-      background: linear-gradient(90deg, var(--primary) 30%, var(--accent) 100%);
-      animation: underlineIn .23s;
-    }
-    @keyframes underlineIn { from { width: 0 } to { width: 70% } }
-    section {
-      position: relative; max-width: 900px; margin: 2.3rem auto; padding: 2rem 2.5rem;
-      background: var(--glass-bg); border-radius: 2em; box-shadow: 0 12px 46px 0 #22192d33, 0 1.5px 10px #10102060;
-      backdrop-filter: blur(7px) saturate(1.13); animation: fadeInUp .8s;
-      transition: box-shadow .4s, background 0.6s; z-index: 2; border: 2px solid #1c2137aa;
-    }
-    @keyframes fadeInUp {from { opacity: 0; transform: translateY(40px);} to { opacity: .99; transform: translateY(0); }}
-    .about {
-      background: transparent; box-shadow: none; text-align: center; margin-top: 2rem; animation-delay: .12s;
-    }
-    .about p {
-      font-size: 1.2rem;
-      color: #fff;
-      font-weight: 500;
-      margin: 0 0 16px 0;
-      text-shadow: 0 2px 8px #0008;
-    }
-    #projects .card-flip-wrap {
-      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
-    }
-    .flip-card {
-      min-width: 260px; max-width: 340px; width: 100%; height: 320px; perspective: 1100px;
-      margin-bottom: 1.5em; border-radius: 2em; box-shadow: var(--card-glow);
-    }
-    .flip-card-inner {
-      position: relative; width: 100%; height: 100%; border-radius: inherit;
-      transition: transform .7s cubic-bezier(.2,.9,.5,1);
-      transform-style: preserve-3d;
-    }
-    .flip-card:hover .flip-card-inner, .flip-card:focus .flip-card-inner { transform: rotateY(180deg);}
-    .flip-card-front, .flip-card-back {
-      position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: inherit;
-      padding: 1.27em 1.15em 1.13em;
-      background: rgba(32, 32, 32, 0.94); box-shadow: 0 8px 26px var(--primary)33;
-      border: 2.2px solid #2d2e3950; display: flex; flex-direction: column;
-      justify-content: center; transition: background 0.5s;
-    }
-    .flip-card-front i { font-size:1.6em; margin-bottom:.25em; color:var(--primary);}
-    .flip-card-front h3 {
-      margin: 0 0 .5em 0;
-      color: #7fbced;
-      background: linear-gradient(90deg,#fff,var(--primary) 80%,var(--accent) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.19em;
-      letter-spacing:.15px; transition: filter .3s;
-    }
-    .flip-card-front ul {margin:.4em 0 0 1.1em;color:#ddeeffdd;font-size:1.03em;}
-    .flip-card-back {
-      background: linear-gradient(120deg,#282828 60%,var(--primary)aa,var(--accent)99);
-      color: #fff; transform: rotateY(180deg); text-align: center; box-shadow: var(--card-glow); z-index: 2;
-    }
-    .flip-card-back button, .flip-card-back a {
-      margin-top:1.15em; color: #fff; background: linear-gradient(100deg,var(--primary) 50%,var(--accent) 100%);
-      font-weight: 700; padding:.65em 1.6em; border:none; border-radius:1.2em; font-size:.98em;
-      box-shadow: 0 12px 24px #000a; cursor: pointer; text-decoration: none;
-      transition: background .23s; letter-spacing:.06em;
-    }
-    .flip-card-back button:hover, .flip-card-back a:hover {
-      background: linear-gradient(90deg,var(--accent) 30%,var(--primary) 98%);
-    }
-    #experience b {color:var(--accent);font-weight:700;letter-spacing:.1px;font-size:1.05em;}
-    #experience ul {margin:.5em 0 0 1.2em;font-size:1.04em;color:#d8b8eb;}
-    #skills p { font-size: 1.13em; color: #a4c7ff;}
-    #skills b { color: var(--primary); font-size: 1.04em;}
-    #education ul { color: #ffc2e6; font-size: 1.13em;}
-    #achievements {background: linear-gradient(120deg,#1a102480 70%,var(--primary)22,var(--accent)12);}
-    #achievements ul { color: #ffd3fb; font-size: 1.08em;}
-    #achievements h3 {margin:0 0 .49em;color:#b17fca;}
-    #contact a {
-      color: var(--primary); transition: color .2s; font-weight: 700; text-decoration: none;
-      margin: 0 1em 0 0; font-size: 1.18em; vertical-align: middle; display: inline-block;
-    }
-    #contact a:last-child { margin-right: 0; }
-    #contact a:hover { color: var(--accent); text-shadow: 0 0 3px var(--accent);}
-    #contact .fa-brands, #contact .fa-envelope, #contact .fa-phone {margin-right: .24em;font-size: 1.23em; vertical-align: middle;}
-    @media (max-width: 700px) {
-      section {padding: 1.17rem 0.7rem;}
-      .about {padding: 0 0.11em 1em;}
-      header h1 {font-size: 1.4rem;}
-      nav {font-size: .95em;}
-      #projects .card-flip-wrap {flex-direction: column; gap: 1rem;}
-      .flip-card {max-width: 96vw;}
-      section {margin: 1.15rem 0.2rem;}
-      #contact a { font-size: 1em; }
-    }
-    .revealed {opacity:1 !important;transform:translateY(0) !important;transition:opacity .67s,transform .68s;}
-    section, .flip-card {opacity:0;transform:translateY(40px);transition:opacity .7s,transform .66s;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rushikesh Bedre // Data & Web Specialist</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0d0c22;
+            --primary-accent: #a374ff;
+            --secondary-accent: #00f6ff;
+            --text-color: #d1d1e0;
+            --text-muted: #8892b0;
+            --card-bg: rgba(22, 21, 53, 0.4);
+            --border-color: rgba(163, 116, 255, 0.2);
+            --font-family: 'Share Tech Mono', monospace;
+            --shadow-color: rgba(163, 116, 255, 0.3);
+            
+            --gradient: linear-gradient(135deg, #a374ff, #00f6ff, #ff00c1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            overflow-x: hidden;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Animated Aurora Gradient Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 10% 20%, rgba(163, 116, 255, 0.2), transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(0, 246, 255, 0.2), transparent 40%),
+                        radial-gradient(circle at 50% 50%, rgba(255, 0, 193, 0.15), transparent 50%);
+            animation: moveGradient 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveGradient {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            100% { transform: translate(20px, 30px) scale(1.2); opacity: 1; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0c22; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-accent); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary-accent); }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Header --- */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(13, 12, 34, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            transition: top 0.3s ease-in-out;
+        }
+        
+        .header.hidden {
+            top: -100px;
+        }
+
+        .header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .logo span {
+            color: var(--primary-accent);
+            text-shadow: 0 0 10px var(--primary-accent);
+        }
+        .logo:hover {
+            color: var(--primary-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-accent);
+            text-shadow: 0 0 8px var(--primary-accent);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .hero-intro {
+            color: var(--secondary-accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            text-decoration: none;
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s ease-in-out;
+            z-index: 1;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--primary-accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            z-index: -1;
+        }
+        .cta-button:hover {
+            color: var(--bg-color);
+        }
+        .cta-button:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+
+        /* --- Content Sections --- */
+        .content-section {
+            padding: 8rem 0;
+            opacity: 0; /* Initially hidden for GSAP animation */
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--text-color);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--gradient);
+            margin: 1rem auto 0;
+        }
+
+        /* --- Card System --- */
+        .card-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            perspective: 1500px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                        box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform, box-shadow;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) rotateX(var(--rotateX, 0)) rotateY(var(--rotateY, 0));
+            box-shadow: 0 25px 50px -12px var(--shadow-color);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: inherit;
+            background: radial-gradient(
+                400px circle at var(--mouse-x) var(--mouse-y),
+                rgba(163, 116, 255, 0.3),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card__header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .card__header i {
+            font-size: 1.5rem;
+            color: var(--primary-accent);
+        }
+        .card__header h3 {
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        .card__body p, .card__body ul {
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+        .experience-card ul { list-style: none; padding-left: 0; }
+        .experience-card li { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.75rem; }
+        .experience-card li i { color: var(--secondary-accent); margin-top: 5px; font-size: 0.8rem; }
+
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+        .card__footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .card__footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .card__footer a:hover {
+            color: var(--primary-accent);
+            text-shadow: 0 0 8px var(--primary-accent);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 4rem 0 2rem 0;
+            text-align: center;
+            background: rgba(13, 12, 34, 0.6);
+            border-top: 1px solid var(--border-color);
+        }
+        .footer p { color: var(--text-muted); }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-info a:hover {
+            color: var(--primary-accent);
+        }
+
+        .social-links {
+            margin-bottom: 2rem;
+        }
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+            display: inline-block;
+        }
+        .social-links a:hover {
+            color: var(--primary-accent);
+            transform: scale(1.2) translateY(-3px);
+            text-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        .footer-credit {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        /* --- Mobile Navigation --- */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger-menu .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--text-color);
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: 0;
+                top: 0;
+                height: 100vh;
+                width: 70%;
+                background: var(--bg-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+                border-left: 1px solid var(--border-color);
+            }
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            .nav-links li {
+                opacity: 0;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+            .hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger-menu.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .hero-content { 
+                text-align: center; 
+            }
+            .hero-description { 
+                margin: 2rem auto; 
+            }
+            #hero {
+                padding-top: 5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="spotlight"></div>
-  <header>
-    <h1>Rushikesh Bedre</h1>
-    <p>Aspiring Business Intelligence Developer & Data Analyst</p>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
 
-  <section class="about">
-    <p>
-      Hands-on in <b>Python, SQL, AWS QuickSight, Power BI, Tableau, ThoughtSpot</b>.<br>
-      Proficient in data visualization, cloud analytics, ETL pipeline optimization, and dashboard development.
-    </p>
-  </section>
+    <canvas id="bg-canvas"></canvas>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="card-flip-wrap">
-      <!-- HR Analytics -->
-      <div class="flip-card" tabindex="0">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <i class="fa-solid fa-chart-pie"></i>
-            <h3>HR Analytics Dashboard</h3>
-            <ul>
-              <li>Interactive dashboard for 1,400+ employee records.</li>
-              <li>Advanced SQL for transformation & Tableau for visuals.</li>
-              <li>Reduces manual HR reporting by 40%, enables real-time analysis.</li>
+    <header class="header">
+        <nav class="container">
+            <a href="#" class="logo">[<span>RB</span>_]</a>
+            <ul class="nav-links">
+                <li><a href="#skills" class="nav-link">01_SKILLS</a></li>
+                <li><a href="#experience" class="nav-link">02_EXPERIENCE</a></li>
+                <li><a href="#projects" class="nav-link">03_PROJECTS</a></li>
+                <li><a href="#certificates" class="nav-link">04_CERTIFICATES</a></li>
+                <li><a href="#contact" class="nav-link">05_CONTACT</a></li>
             </ul>
+            <button class="hamburger-menu" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="hero">
+            <div class="hero-content">
+                <p class="hero-intro">// Initializing contact...</p>
+                <h1 class="hero-title">Rushikesh Bedre.</h1>
+                <h2 class="hero-subtitle">I engineer data-driven realities.</h2>
+                <p class="hero-description">
+                    Data Analyst & Automation Engineer forging actionable insights from complex datasets and building intelligent systems for the web. My mission is to decode the digital frontier.
+                </p>
+                <a href="#projects" class="cta-button">Engage_Protocols // View Work</a>
+            </div>
+        </section>
+
+        <section id="skills" class="content-section">
+            <h2 class="section-title">01_SKILLSET_MATRIX</h2>
+            <div class="card-grid skills-grid">
+                <div class="card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-code"></i>
+                        <h3>Languages & Libraries</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Python | SQL | Pandas | NumPy | PySpark | Matplotlib | Seaborn</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-database"></i>
+                        <h3>BI & Cloud Tech</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Power BI | Tableau | AWS QuickSight | Selenium | AWS | Jupyter</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-robot"></i>
+                        <h3>Generative AI</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Prompt Engineering | RAG Concepts | LangChain (conceptual) | OpenAI API</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience" class="content-section">
+            <h2 class="section-title">02_PROFESSIONAL_LOG</h2>
+            <div class="card experience-card">
+                 <div class="card__header">
+                      <h3>Business Intelligence Developer Intern</h3>
+                      <p class="company-info" style="margin-left:auto; color: var(--text-muted);">Rainbow Infotech // Apr-Jul 2025</p>
+                 </div>
+                 <div class="card__body">
+                      <ul>
+                           <li><i class="fa-solid fa-chevron-right"></i>Built & deployed 12+ dynamic dashboards, reducing manual reporting by 40%.</li>
+                           <li><i class="fa-solid fa-chevron-right"></i>Optimized 60+ SQL-based ETL pipelines, cutting report generation time by 50%.</li>
+                           <li><i class="fa-solid fa-chevron-right"></i>Integrated AI visuals, accelerating dashboard delivery by 35%.</li>
+                      </ul>
+                 </div>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <h2 class="section-title">03_PROJECTS_ARCHIVE</h2>
+            <div class="card-grid">
+                <div class="card project-card">
+                    <div class="card__header">
+                        <h3>HR Analytics Dashboard</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Interactive Tableau dashboard analyzing 1,400+ employee records for insights on attrition, compensation, and diversity.</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="#" target="_blank">Access Live_Instance <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="#" target="_blank">Review Source_Code <i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="card project-card">
+                    <div class="card__header">
+                        <h3>Crime Data Analysis</h3>
+                    </div>
+                     <div class="card__body">
+                        <p>Processed 1M+ crime records with PySpark/Pandas and built a real-time Power BI monitoring dashboard.</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="#" target="_blank">Access Live_Instance <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="#" target="_blank">Review Source_Code <i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="content-section">
+            <h2 class="section-title">04_CERTIFICATES_LOG</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-certificate"></i>
+                        <h3>Tata Group: Data Analytics</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Virtual experience in predictive modeling and GenAI-based collections strategy.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-certificate"></i>
+                        <h3>Salesforce: Agentblazer</h3>
+                    </div>
+                     <div class="card__body">
+                        <p>Expertise in AI-driven customer service solutions using Salesforce Data Cloud.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-certificate"></i>
+                        <h3>GenAI Masterclass</h3>
+                    </div>
+                     <div class="card__body">
+                        <p>Masterclass on integrating Generative AI into analytics for enhanced decision-making.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer id="contact" class="footer">
+          <h2 class="section-title">05_CONTACT_PROTOCOL</h2>
+          <p>Open channel for new directives, collaborations, or opportunities.</p>
+          <div class="contact-info">
+               <a href="mailto:rushibedre10@gmail.com">Signal: rushibedre10@gmail.com</a>
+               <a href="tel:+917058160381">Comms: +91 7058160381</a>
           </div>
-          <div class="flip-card-back">
-            <p>Data-driven insights for HR teams. Click to view on GitHub.</p>
-            <a href="https://github.com/rushibedre/hr-analytics-dashboard" target="_blank">
-              <i class="fa-brands fa-github"></i> View Code
-            </a>
+          <div class="social-links">
+               <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+               <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
-        </div>
-      </div>
-      <!-- Crime Data -->
-      <div class="flip-card" tabindex="0">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Crime Data Analysis & Monitoring</h3>
-            <ul>
-              <li>Processed 1M+ records using PySpark & Pandas.</li>
-              <li>Power BI dashboard for real-time crime analytics.</li>
-              <li>Built 25+ visualizations including heatmaps and trends.</li>
-            </ul>
-          </div>
-          <div class="flip-card-back">
-            <p>Smart monitoring of urban crime. See more on GitHub.</p>
-            <a href="https://github.com/rushibedre/crime-data-analysis" target="_blank">
-              <i class="fa-brands fa-github"></i> View Code
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Mechatronics Traffic Control -->
-      <div class="flip-card" tabindex="0">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <i class="fa-solid fa-car-on"></i>
-            <h3>Mechatronics-Based Advanced Traffic Control System</h3>
-            <ul>
-              <li>Integrated mechanical & electronics for smart, precise traffic control.</li>
-              <li>Dual system: generates electricity & prevents reverse movement on lanes.</li>
-              <li>Auto-syncs with signals, reduces violations & boosts safety.</li>
-              <li>Future: ANPR cameras to auto-issue challans & track vehicles in real time.</li>
-            </ul>
-          </div>
-          <div class="flip-card-back">
-            <p>Innovating smart cities with mechatronics.<br>Publication available.</p>
-            <a href="#achievements"><i class="fa-solid fa-trophy"></i> See Paper & Achievements</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <p class="footer-credit">&copy; 2025 Rushikesh Bedre. System architecture inspired by the digital cosmos.</p>
+    </footer>
 
-  <section id="experience">
-    <h2>Experience</h2>
-    <div>
-      <b>Business Intelligence Developer Intern</b> – Rainbow Infotech Pvt Ltd (Apr 2025 – Jul 2025)
-      <ul>
-        <li>Developed 12+ dashboards with Tableau, Power BI, QuickSight, and ThoughtSpot.</li>
-        <li>Improved reporting time by 40% and optimized SQL-based ETL pipelines.</li>
-        <li>Collaborated across 5+ teams; delivered 20+ custom dashboards.</li>
-      </ul>
-    </div>
-  </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    
+            // --- 1. THREE.JS 3D PARTICLE BACKGROUND ---
+            const canvas = document.getElementById('bg-canvas');
+            if (canvas) {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  <section id="skills">
-    <h2>Skills & Tools</h2>
-    <p>
-      <b>Languages:</b> Python, SQL<br>
-      <b>Libraries:</b> Pandas, NumPy, Matplotlib, Seaborn, PySpark<br>
-      <b>Tools:</b> AWS QuickSight, ThoughtSpot, Power BI, Tableau, Power Pivot, Selenium<br>
-      <b>Soft Skills:</b> Teamwork, Problem-Solving, AI-Assisted Research
-    </p>
-  </section>
+                const particleCount = 5000;
+                const positions = new Float32Array(particleCount * 3);
+                for (let i = 0; i < particleCount * 3; i++) {
+                    positions[i] = (Math.random() - 0.5) * 10;
+                }
+                const particlesGeometry = new THREE.BufferGeometry();
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                
+                const particlesMaterial = new THREE.PointsMaterial({
+                    size: 0.005,
+                    color: 0xa374ff,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending
+                });
+                const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+                scene.add(particles);
+                camera.position.z = 5;
 
-  <section id="education">
-    <h2>Education</h2>
-    <ul>
-      <li><b>B.Tech. Electronics & Communication Engineering</b>, Priyadarshini Bhagwati COE, CGPA 7.73/10 (2021-2024)</li>
-      <li><b>Diploma in Mechanical Engineering</b>, Suryodaya COE, CGPA 8.6/10 (2019-2021)</li>
-    </ul>
-  </section>
+                const mouse = new THREE.Vector2();
+                window.addEventListener('mousemove', (event) => {
+                    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                });
+                const clock = new THREE.Clock();
+                const animate = () => {
+                    const elapsedTime = clock.getElapsedTime();
+                    particles.rotation.y = elapsedTime * 0.05;
+                    particles.rotation.x = -mouse.y * 0.1;
+                    particles.rotation.y += mouse.x * 0.1;
+                    renderer.render(scene, camera);
+                    window.requestAnimationFrame(animate);
+                };
+                animate();
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                });
+            }
 
-  <section id="achievements">
-    <h2>Achievements & Research</h2>
-    <h3>Research Publications</h3>
-    <ul>
-      <li>
-        <b>Mechatronics-Based Advanced Traffic Control System</b> — Published in International Journal<br>
-        <span style="font-size:0.97em;color:#dad2ff;">
-          Discusses development & real-world implementation of a mechatronics-driven traffic system, featuring dual-purpose mechanics, safety optimization, and scope for ANPR & centralized tracking.
-        </span>
-      </li>
-    </ul>
-    <h3>Awards</h3>
-    <ul>
-      <li>Paper selected for presentation at National Engineering Symposium 2025.</li>
-      <li>Recognized by College as “Best Research Project 2024-25”.</li>
-    </ul>
-  </section>
+            // --- 2. GSAP ANIMATIONS ---
+            gsap.registerPlugin(ScrollTrigger);
+            
+            const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+            heroTl.from('.hero-intro', { opacity: 0, y: 20, duration: 0.8 })
+                  .from('.hero-title', { opacity: 0, y: 20, duration: 0.8 }, '-=0.5')
+                  .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8 }, '-=0.5')
+                  .from('.hero-description', { opacity: 0, y: 20, duration: 1 }, '-=0.6')
+                  .from('.cta-button', { opacity: 0, y: 20, duration: 1 }, '-=0.7');
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      <a href="mailto:rushibedre10@gmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
-      <a href="tel:+917058160381"><i class="fa-solid fa-phone"></i>+91 70581 60381</a>
-      <a href="https://www.linkedin.com/in/rushikesh-bedre" target="_blank"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
-      <a href="https://github.com/rushibedre" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a>
-    </p>
-  </section>
+            const sections = gsap.utils.toArray('.content-section');
+            sections.forEach((section, i) => {
+                const sectionTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+                
+                sectionTl.to(section, { opacity: 1, duration: 0.5 })
+                         .from(section.querySelector('.section-title'), {
+                             opacity: 0, y: 50, duration: 1, ease: 'power3.out'
+                         })
+                         .from(section.querySelectorAll('.card'), {
+                             opacity: 0, y: 50, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+                         }, '-=0.7');
+            });
+            
+            // --- 3. INTERACTIVE CARD EFFECTS ---
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
 
-  <script>
-    // Section/project scroll reveal
-    const revealEls = document.querySelectorAll('section, .flip-card');
-    function revealOnScroll() {
-      let wh = window.innerHeight * 0.96;
-      revealEls.forEach(el => {
-        if (el.getBoundingClientRect().top < wh) el.classList.add('revealed');
-      });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('DOMContentLoaded', revealOnScroll);
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
 
-    // Sticky nav highlight
-    const navLinks = document.querySelectorAll('nav a');
-    function setActiveNav() {
-      let fromTop = window.scrollY + 90;
-      navLinks.forEach(link => {
-        let href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          let section = document.querySelector(href);
-          if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        }
-      });
-    }
-    window.addEventListener('scroll', setActiveNav);
-    window.addEventListener('DOMContentLoaded', setActiveNav);
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -7;
+                    const rotateY = ((x - centerX) / centerX) * 7;
+                    card.style.setProperty('--rotateX', `${rotateX}deg`);
+                    card.style.setProperty('--rotateY', `${rotateY}deg`);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--rotateX', '0deg');
+                    card.style.setProperty('--rotateY', '0deg');
+                });
+            });
+            
+            // --- 4. RESPONSIVE NAVIGATION ---
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const links = document.querySelectorAll('.nav-links li');
 
-    // Mouse spotlight
-    const spotlight = document.getElementById('spotlight');
-    document.body.addEventListener('mousemove', (e) => {
-      spotlight.style.left = (e.pageX-265)+"px";
-      spotlight.style.top = (e.pageY-265)+"px";
-    });
-    document.body.addEventListener('mouseleave', () => {
-      spotlight.style.left="-999vw"; spotlight.style.top="-999vw";
-    });
-  </script>
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+
+                links.forEach((link, index) => {
+                    if(link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (hamburger.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        links.forEach(link => link.style.animation = '');
+                    }
+                });
+            });
+            
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `
+                @keyframes navLinkFade {
+                    from { opacity: 0; transform: translateX(50px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }`;
+            document.head.appendChild(styleSheet);
+
+            // --- 5. HIDE HEADER ON SCROLL DOWN ---
+            let lastScrollTop = 0;
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    header.classList.add('hidden');
+                } else {
+                    header.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            });
+
+        });
+    </script>
 </body>
 </html>

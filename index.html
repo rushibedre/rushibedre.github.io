@@ -19,7 +19,8 @@
             --text-muted: #8892b0;
             --card-bg: rgba(22, 21, 53, 0.4);
             --border-color: rgba(163, 116, 255, 0.2);
-            --font-family: 'Share Tech Mono', monospace;
+            --font-family: 'Inter', sans-serif;
+
             --shadow-color: rgba(163, 116, 255, 0.3);
             
             --gradient: linear-gradient(135deg, #a374ff, #00f6ff, #ff00c1);
@@ -310,12 +311,16 @@
             padding-top: 1.5rem;
             display: flex;
             gap: 1.5rem;
+            align-items: center; /* Aligns text and icon */
         }
         .card__footer a {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s, text-shadow 0.3s;
+            display: inline-flex; /* Helps align icon */
+            align-items: center;
+            gap: 0.5rem; /* Space between text and icon */
         }
         .card__footer a:hover {
             color: var(--primary-accent);
@@ -433,7 +438,7 @@
 
     <header class="header">
         <nav class="container">
-            <a href="#" class="logo">[<span></span>]</a>
+            <a href="#" class="logo"><span></span></a>
             <ul class="nav-links">
                 <li><a href="#skills" class="nav-link">SKILLS</a></li>
                 <li><a href="#experience" class="nav-link">EXPERIENCE</a></li>
@@ -457,12 +462,12 @@
                 <p class="hero-description">
                     Data Analyst & Automation Engineer forging actionable insights from complex datasets and building intelligent systems for the web. My mission is to decode the digital frontier.
                 </p>
-                <a href="#projects" class="cta-button">Engage_Protocols // View Work</a>
+                <a href="#projects" class="cta-button">View Work</a>
             </div>
         </section>
 
         <section id="skills" class="content-section">
-            <h2 class="section-title">TECHINICAL SKILLS</h2>
+            <h2 class="section-title">TECHNICAL SKILLS</h2>
             <div class="card-grid skills-grid">
                 <div class="card">
                     <div class="card__header">
@@ -503,9 +508,9 @@
                  </div>
                  <div class="card__body">
                       <ul>
-                           <li><i class="fa-solid fa-chevron-right"></i>Built & deployed 12+ dynamic dashboards, reducing manual reporting by 40%.</li>
-                           <li><i class="fa-solid fa-chevron-right"></i>Optimized 60+ SQL-based ETL pipelines, cutting report generation time by 50%.</li>
-                           <li><i class="fa-solid fa-chevron-right"></i>Integrated AI visuals, accelerating dashboard delivery by 35%.</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>Built & deployed 12+ dynamic dashboards, reducing manual reporting by 40%.</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>Optimized 60+ SQL-based ETL pipelines, cutting report generation time by 50%.</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>Integrated AI visuals, accelerating dashboard delivery by 35%.</li>
                       </ul>
                  </div>
             </div>
@@ -522,8 +527,8 @@
                         <p>Interactive Tableau dashboard analyzing 1,400+ employee records for insights on attrition, compensation, and diversity.</p>
                     </div>
                     <div class="card__footer">
-                        <a href="#" target="_blank">Access Live_Instance <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                        <a href="#" target="_blank">Review Source_Code <i class="fa-brands fa-github"></i></a>
+                        <a href="https://public.tableau.com/views/Book1_17529958197380/Main?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank">Access Live_Instance <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://github.com/rushibedre/hr-analytics-dashboard" target="_blank">Review Source_Code <i class="fa-brands fa-github"></i></a>
                     </div>
                 </div>
                 <div class="card project-card">
@@ -584,8 +589,8 @@
                <a href="tel:+917058160381">Ph No: +91 7058160381</a>
           </div>
           <div class="social-links">
-               <a href="#" target="_blank" aria-label="GitHub"><i class="https://github.com/rushibedre"></i></a>
-               <a href="#" target="_blank" aria-label="LinkedIn"><i class="https://www.linkedin.com/in/rushikesh-bedre"></i></a>
+               <a href="https://github.com/rushibedre" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+               <a href="https://www.linkedin.com/in/rushikesh-bedre" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
           </div>
           <p class="footer-credit">&copy; 2025 Rushikesh Bedre.</p>
     </footer>

@@ -19,7 +19,7 @@
             --text-muted: #8892b0;
             --card-bg: rgba(22, 21, 53, 0.4);
             --border-color: rgba(163, 116, 255, 0.2);
-            --font-family: 'Inter', sans-serif;
+            --font-family: 'Inter', sans-serif; /* A more modern font choice */
 
             --shadow-color: rgba(163, 116, 255, 0.3);
             
@@ -240,6 +240,15 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             perspective: 1500px;
         }
+        
+        /* NEW STYLE FOR VERTICAL EXPERIENCE LIST */
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px; /* To keep it centered and readable */
+            margin: 0 auto;
+        }
 
         .card {
             background: var(--card-bg);
@@ -457,6 +466,7 @@
     <main class="container">
         <section id="hero">
             <div class="hero-content">
+                <p class="hero-intro"></p>
                 <h1 class="hero-title">Rushikesh Bedre.</h1>
                 <h2 class="hero-subtitle">I engineer data-driven realities.</h2>
                 <p class="hero-description">
@@ -501,24 +511,53 @@
         
         <section id="experience" class="content-section">
             <h2 class="section-title">PROFESSIONAL EXPERIENCE </h2>
-            <div class="card experience-card">
-                 <div class="card__header">
-                      <h3>Business Intelligence Developer Intern</h3>
-                      <p class="company-info" style="margin-left:auto; color: var(--text-muted);">Rainbow Infotech // Apr-Jul 2025</p>
-                 </div>
-                 <div class="card__body">
-                      <ul>
-                            <li><i class="fa-solid fa-chevron-right"></i>Built & deployed 12+ dynamic dashboards, reducing manual reporting by 40%.</li>
-                            <li><i class="fa-solid fa-chevron-right"></i>Optimized 60+ SQL-based ETL pipelines, cutting report generation time by 50%.</li>
-                            <li><i class="fa-solid fa-chevron-right"></i>Integrated AI visuals, accelerating dashboard delivery by 35%.</li>
-                      </ul>
-                 </div>
+            <div class="experience-list">
+                <div class="card experience-card">
+                     <div class="card__header">
+                         <h3>Business Intelligence Developer Intern</h3>
+                         <p class="company-info" style="margin-left:auto; color: var(--text-muted);">Rainbow Infotech // Apr-Jul 2025</p>
+                     </div>
+                     <div class="card__body">
+                         <ul>
+                              <li><i class="fa-solid fa-chevron-right"></i>Built & deployed 12+ dynamic dashboards, reducing manual reporting by 40%.</li>
+                              <li><i class="fa-solid fa-chevron-right"></i>Optimized 60+ SQL-based ETL pipelines, cutting report generation time by 50%.</li>
+                              <li><i class="fa-solid fa-chevron-right"></i>Integrated AI visuals, accelerating dashboard delivery by 35%.</li>
+                         </ul>
+                     </div>
+                </div>
+                <div class="card experience-card">
+                    <div class="card__header">
+                        <h3>Full-Stack Data Analytics Trainee</h3>
+                        <p class="company-info" style="margin-left:auto; color: var(--text-muted);">Q spiders Training Institute, Pune | Aug 2024 - Mar 2025</p>
+                    </div>
+                    <div class="card__body">
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>Mastered an intensive, full-stack data curriculum covering Python, SQL, ETL, and enterprise BI platforms (Power BI, Tableau).</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>Developed a portfolio of hands-on projects focused on test automation, data validation, and end-to-end analysis workflows.</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>Honed advanced problem-solving and debugging skills through rigorous, real-world case studies and practical assignments.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="projects" class="content-section">
             <h2 class="section-title">PROJECTS</h2>
             <div class="card-grid">
+                <!-- NEW PROJECT: Credit Risk Analysis -->
+                <div class="card project-card">
+                    <div class="card__header">
+                        <h3>Credit Risk Analysis Dashboard</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>An executive Power BI dashboard analyzing a $16B loan portfolio, featuring a 'What-If' simulation tool to model the financial impact of lending policy changes.</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="#" target="_blank">Access Live_Instance <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://github.com/rushibedre/Credit-Risk-Analysis-Power-BI" target="_blank">Review Source_Code <i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                <!-- EXISTING PROJECT: HR Analytics -->
                 <div class="card project-card">
                     <div class="card__header">
                         <h3>HR Analytics Dashboard</h3>
@@ -531,6 +570,7 @@
                         <a href="https://github.com/rushibedre/hr-analytics-dashboard" target="_blank">Review Source_Code <i class="fa-brands fa-github"></i></a>
                     </div>
                 </div>
+                <!-- RE-ADDED PROJECT: Crime Data Analysis -->
                 <div class="card project-card">
                     <div class="card__header">
                         <h3>Crime Data Analysis</h3>
@@ -549,7 +589,7 @@
         <section id="certificates" class="content-section">
             <h2 class="section-title">CERTIFICATES</h2>
             <div class="card-grid">
-                <div class="card">
+                <div class="card project-card">
                     <div class="card__header">
                         <i class="fa-solid fa-certificate"></i>
                         <h3>Tata Group: Data Analytics</h3>
@@ -557,23 +597,32 @@
                     <div class="card__body">
                         <p>Virtual experience in predictive modeling and GenAI-based collections strategy.</p>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card__header">
-                        <i class="fa-solid fa-certificate"></i>
-                        <h3>Salesforce: Agentblazer</h3>
-                    </div>
-                     <div class="card__body">
-                        <p>Expertise in AI-driven customer service solutions using Salesforce Data Cloud.</p>
+                    <div class="card__footer">
+                        <a href="https://www.theforage.com/achievements" target="_blank">Verify Credential <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card project-card">
                     <div class="card__header">
                         <i class="fa-solid fa-certificate"></i>
-                        <h3>GenAI Masterclass</h3>
+                        <h3>Salesforce AI & Data Cloud</h3>
                     </div>
                      <div class="card__body">
-                        <p>Masterclass on integrating Generative AI into analytics for enhanced decision-making.</p>
+                        <p>Achieved 16+ Trailhead badges demonstrating expertise in Generative AI, Data Cloud, Agentforce, and the Einstein Trust Layer.</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="https://www.salesforce.com/trailblazer/c506ezvpgurgjkg1zn" target="_blank">Verify Trailblazer ID <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="card project-card">
+                    <div class="card__header">
+                        <i class="fa-solid fa-certificate"></i>
+                        <h3>LangChain for LLM Apps</h3>
+                    </div>
+                     <div class="card__body">
+                        <p>Completed the DeepLearning.AI short course on developing LLM applications with LangChain, covering chains, agents, and memory management.</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="https://learn.deeplearning.ai/accomplishments/8f17ff9e-9cca-49c2-ba51-6da80b911cdf?usp=sharing" target="_blank">Verify Credential <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
@@ -754,8 +803,33 @@
                 }
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
             });
+            
+            // --- 6. Active Nav Link on Scroll ---
+            const sectionsForNav = document.querySelectorAll('section[id]');
+            window.addEventListener('scroll', navHighlighter);
+            function navHighlighter() {
+                let scrollY = window.pageYOffset;
+                sectionsForNav.forEach(current => {
+                    const sectionHeight = current.offsetHeight;
+                    const sectionTop = current.offsetTop - 50;
+                    const sectionId = current.getAttribute('id');
+
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+                        const activeLink = document.querySelector('.nav-links a[href*=' + sectionId + ']');
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    } else {
+                        const activeLink = document.querySelector('.nav-links a[href*=' + sectionId + ']');
+                        if (activeLink) {
+                           activeLink.classList.remove('active');
+                        }
+                    }
+                });
+            }
 
         });
     </script>
 </body>
 </html>
+
